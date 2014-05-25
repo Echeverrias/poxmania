@@ -1,22 +1,17 @@
+//Autores: Samuel Martin y Juan Antonio Echeverrias 
+
 package poxmania.dao;
 import java.util.List;
 import javax.persistence.TypedQuery;
 import org.springframework.stereotype.Component;
 import poxmania.model.Producto;
 
-/**
- *
- * @autores 
- */
-
-  
 @Component
 public class ProductoDAO extends GeneralDAO<Producto,Integer>{
-    
-      
-      public ProductoDAO() {
-          super();
-      }
+     
+    public ProductoDAO() {
+        super();
+    }
  
     public List<Producto> findByNombreproducto (String nombre){
         this.open();

@@ -1,3 +1,5 @@
+//Autores: Samuel Martin y Juan Antonio Echeverrias 
+
 package poxmania.dao;
 
 import java.util.List;

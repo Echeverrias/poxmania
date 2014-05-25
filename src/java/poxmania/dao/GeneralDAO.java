@@ -1,3 +1,5 @@
+//Autores: Samuel Martin y Juan Antonio Echeverrias 
+
 package poxmania.dao;
 
 import java.io.Serializable;
@@ -8,9 +10,6 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
-
-
-
 public class GeneralDAO<T, ID extends Serializable> {
 
     private EntityManager manager;
@@ -18,11 +17,10 @@ public class GeneralDAO<T, ID extends Serializable> {
 
     public GeneralDAO() {
         factory = Persistence.createEntityManagerFactory("Poxmania_280PU");
-         manager = factory.createEntityManager();
+        manager = factory.createEntityManager();
     }
     
     public void open() {
-
         if (!factory.isOpen()) {
            factory = Persistence.createEntityManagerFactory("Poxmania_280PU");
         }

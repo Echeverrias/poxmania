@@ -1,14 +1,11 @@
+//Autores: Samuel Martin y Juan Antonio Echeverrias 
+
 package poxmania.dao;
 
 import java.util.List;
 import javax.persistence.TypedQuery;
 import org.springframework.stereotype.Component;
 import poxmania.model.Usuario;
-
-/**
- **
- * @autores: Samuel Martin y Juan Antonio Echeverrias 
- */
 
 @Component
 public class UsuarioDAO extends GeneralDAO <Usuario, Integer>{
