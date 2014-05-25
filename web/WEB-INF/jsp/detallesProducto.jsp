@@ -17,9 +17,8 @@
     </head>
     <body>
         <c:import url="cabeceraProductos.jsp" charEncoding="utf-8"/>      
-        <h2>${prod.nombreproducto}</h2>
         <div class="main">
-            <h1 class="page-header">Camara cara</h1>
+            <h1 class="page-header">${prod.nombreproducto}</h1>
             <div class="izquierda">
                 <div class="thumbnail">
                     <img  alt="300x200" src=<c:url value="${prod.imagen}" /> style="width: 100%; ">
@@ -39,7 +38,7 @@
                     <c:if test="${prod.stock <= 0}">
                         <a href="<c:url value="/meterEnCarro?id=${prod.idproducto}" />" class="btn btn-primary" role="button" disabled>Comprar</a>
                     </c:if>
-                    <a href="/index" class="btn btn-default" role="button">Volver al inicio</a></p>
+                    <a href="<c:url value="/index" />" class="btn btn-default" role="button">Volver al inicio</a></p>
             </div>
         </div>
     </body>

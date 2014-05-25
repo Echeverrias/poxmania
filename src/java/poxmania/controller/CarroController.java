@@ -118,7 +118,7 @@ public class CarroController {
                 }
             }
             else{ //carro vacio
-                return "index";
+                return "redirect:index";
             }
 	}
         

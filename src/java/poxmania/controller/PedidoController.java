@@ -17,6 +17,7 @@ import poxmania.model.Pedido;
 import poxmania.model.PedidoConProductos;
 import poxmania.model.ProductoCarro;
 import poxmania.model.Relacionproductopedido;
+import poxmania.model.Usuario;
 
 @Controller
 public class PedidoController {
@@ -61,6 +62,26 @@ public class PedidoController {
         @RequestMapping(value="/verMisPedidos", method = RequestMethod.GET)
 	public String verMisPedidos(@RequestParam(value = "uId") int uId,
                 ModelMap model) {
+            Usuario usuario = usuDAO.get(uId);
+            List <Pedido> listaPedidos = daoPed.findByUsuario(usuario);
+            List <PedidoConProductos> listaFinal = new ArrayList <PedidoConProductos>();
+            for(Pedido ped:listaPedidos){
+                List <Relacionproductopedido> listaRelacion = daoRel.findByIdPedido(ped.getIdpedido());
+                List <ProductoCarro> listaPC = new ArrayList <ProductoCarro>();
+                for(Relacionproductopedido rel:listaRelacion){
+                    listaPC.add(new ProductoCarro(rel.getProducto(),rel.getCantidad()));
+                }
+                listaFinal.add(new PedidoConProductos(ped, listaPC));
+            }
+            model.addAttribute("listaPedidos", listaFinal);
+            model.addAttribute("usuarioPedido", usuDAO.get(uId));
+            return "verMisPedidos";
+	}
+        
+        /*
+        @RequestMapping(value="/verMisPedidos", method = RequestMethod.GET)
+	public String verMisPedidos(@RequestParam(value = "uId") int uId,
+                ModelMap model) {
             
             List <Pedido> listaPedidos = daoPed.findByUserId(uId);
             List <PedidoConProductos> listaFinal = new ArrayList <PedidoConProductos>();
@@ -80,7 +101,7 @@ public class PedidoController {
             return "verMisPedidos";
 	}
         
-
+   */
         
     
 }

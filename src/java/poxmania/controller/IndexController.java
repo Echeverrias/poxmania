@@ -43,7 +43,7 @@ public class IndexController {
         List <Categoria> listaCategorias = null;
         listaCategorias = daoCat.findAll();
         model.addAttribute("listaCategorias", listaCategorias);
-        model.addAttribute("listaproductos", listaProductos);
+        //model.addAttribute("listaproductos", listaProductos);
 	return "index";
 	}
         

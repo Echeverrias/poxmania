@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.TypedQuery;
 import org.springframework.stereotype.Component;
 import poxmania.model.Pedido;
+import poxmania.model.Usuario;
 
 /**
  *
@@ -17,19 +18,16 @@ public class PedidoDAO extends GeneralDAO <Pedido, Integer>{
     public PedidoDAO (){
         super();
     }
-    
-    
-    public List<Pedido> findByUserId (int userId){
-        TypedQuery<Pedido> query = getManager().createNamedQuery("Pedido.findAll", Pedido.class);
-        List <Pedido> listaAux = query.getResultList();
-        List <Pedido> lista = new ArrayList<Pedido>();
-        for(Pedido ped:listaAux){
-            if (ped.getIdusuario().getIdusuario() == userId){
-                lista.add(ped);
-            }
-        }
+    public List<Pedido> findByUsuario (Usuario userId){
+        this.open();
+        TypedQuery<Pedido> query= getManager().createNamedQuery("Pedido.findByUsuario", Pedido.class);
+        query.setParameter("idusuario", userId);
+        List <Pedido> lista=query.getResultList();
+        this.close();
         return lista;
     }
+   
+    
     /*
     
     public List<Administrador> findByNombreAdmin (String nombre, String pass){
