@@ -1,3 +1,4 @@
+//Autores: Samuel Martin y Juan Antonio Echeverrias
 
 package poxmania.controller;
 
@@ -21,17 +22,19 @@ import poxmania.model.Usuario;
 
 @Controller
 public class PedidoController {
+    
     @Autowired
     PedidoDAO daoPed;
+    
     @Autowired
     RelacionproductopedidoDAO daoRel;
+    
     @Autowired
     ProductoDAO daoProd;
+    
     @Autowired
     UsuarioDAO usuDAO;
-    
-        
-        
+            
         @RequestMapping(value="/editarPedidos", method = RequestMethod.GET)
 	public String editarPedidos(ModelMap model) {
             List <Pedido> listaPedidos = daoPed.findAll();
@@ -47,8 +50,7 @@ public class PedidoController {
             model.addAttribute("listaPedidos", listaFinal);
             return "editarPedidos";
 	}
-        
-        
+                
         @RequestMapping(value="/editarPedidoConcreto", method = RequestMethod.GET)
 	public String editarPedidoConcreto(@RequestParam(value = "idpedido") int idpedido,
                 @RequestParam(value = "estado") String estado,
@@ -77,31 +79,5 @@ public class PedidoController {
             model.addAttribute("usuarioPedido", usuDAO.get(uId));
             return "verMisPedidos";
 	}
-        
-        /*
-        @RequestMapping(value="/verMisPedidos", method = RequestMethod.GET)
-	public String verMisPedidos(@RequestParam(value = "uId") int uId,
-                ModelMap model) {
-            
-            List <Pedido> listaPedidos = daoPed.findByUserId(uId);
-            List <PedidoConProductos> listaFinal = new ArrayList <PedidoConProductos>();
-            for(Pedido ped:listaPedidos){
-                List <Relacionproductopedido> listaRelacion = daoRel.findByIdPedido(ped.getIdpedido());
-                List <ProductoCarro> listaPC = new ArrayList <ProductoCarro>();
-                for(Relacionproductopedido rel:listaRelacion){
-                    listaPC.add(new ProductoCarro(rel.getProducto(),rel.getCantidad()));
-                }
-                listaFinal.add(new PedidoConProductos(ped, listaPC));
-            }
-            model.addAttribute("listaPedidos", listaFinal);
-            model.addAttribute("usuarioPedido", usuDAO.get(uId));
-            
-            
-            
-            return "verMisPedidos";
-	}
-        
-   */
-        
     
 }

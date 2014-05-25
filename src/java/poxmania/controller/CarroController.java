@@ -1,9 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
+//Autores: Samuel Martin y Juan Antonio Echeverrias
 package poxmania.controller;
 
 import java.util.List;
@@ -28,169 +23,158 @@ import poxmania.model.ProductoCarro;
 import poxmania.model.Relacionproductopedido;
 import poxmania.model.Usuario;
 
-
-/**
- *
- * @author Juanan
- */
 @Controller
 public class CarroController {
-    
+
     @Autowired
     ProductoDAO producto;
-    
+
     @Autowired
     UsuarioDAO usuDAO;
-    
+
     @Autowired
     PedidoDAO pedDAO;
-    
+
     @Autowired
     RelacionproductopedidoDAO relDAO;
-    
+
     @Autowired
     CategoriaDAO catDAO;
- 
-    
-    @RequestMapping(value="/meterEnCarro" , method = RequestMethod.GET)
-    public String meterEnCarro(@RequestParam(value="id") int id, Model model, HttpSession session) {
-         Carro carro = (Carro) session.getAttribute("carro");
-         Producto prod = producto.get(id);
-         ProductoCarro prodcarro = new ProductoCarro(prod,1);
-         carro.meterEnCarro(prodcarro);
-         session.setAttribute("carro",carro);
-         model.addAttribute("listaProductos", session.getAttribute("listaproductos"));
-         return "redirect:index";
+
+    @RequestMapping(value = "/meterEnCarro", method = RequestMethod.GET)
+    public String meterEnCarro(@RequestParam(value = "id") int id, Model model, HttpSession session) {
+        Carro carro = (Carro) session.getAttribute("carro");
+        Producto prod = producto.get(id);
+        ProductoCarro prodcarro = new ProductoCarro(prod, 1);
+        carro.meterEnCarro(prodcarro);
+        session.setAttribute("carro", carro);
+        model.addAttribute("listaProductos", session.getAttribute("listaproductos"));
+        return "redirect:index";
     }
-    
-    @RequestMapping(value="/sacarDeCarro" , method = RequestMethod.GET)
-    public String sacarDeCarro(@RequestParam(value="id") int id, Model model, HttpSession session) {
-         Carro carro = (Carro) session.getAttribute("carro");
-         carro.sacarDeCarro(id);
-         session.setAttribute("carro",carro);
-         return "verCarro";
+
+    @RequestMapping(value = "/sacarDeCarro", method = RequestMethod.GET)
+    public String sacarDeCarro(@RequestParam(value = "id") int id, Model model, HttpSession session) {
+        Carro carro = (Carro) session.getAttribute("carro");
+        carro.sacarDeCarro(id);
+        session.setAttribute("carro", carro);
+        return "verCarro";
     }
-    
-    @RequestMapping(value="/incrementar" , method = RequestMethod.GET)
-    public String incrementarUnidades(@RequestParam(value="id") int id, Model model, HttpSession session) {
-         Carro carro = (Carro) session.getAttribute("carro");
-         carro.incrementarUnidades(id, 1);
-         session.setAttribute("carro",carro);
-         return "redirect:verCarro";
+
+    @RequestMapping(value = "/incrementar", method = RequestMethod.GET)
+    public String incrementarUnidades(@RequestParam(value = "id") int id, Model model, HttpSession session) {
+        Carro carro = (Carro) session.getAttribute("carro");
+        carro.incrementarUnidades(id, 1);
+        session.setAttribute("carro", carro);
+        return "redirect:verCarro";
     }
-    
-    @RequestMapping(value="/decrementar" , method = RequestMethod.GET)
-    public String decrementarUnidades(@RequestParam(value="id") int id, Model model, HttpSession session) {
-         Carro carro = (Carro) session.getAttribute("carro");
-         carro.decrementarUnidades(id, 1);
-         session.setAttribute("carro",carro);
-         return "redirect:verCarro";
+
+    @RequestMapping(value = "/decrementar", method = RequestMethod.GET)
+    public String decrementarUnidades(@RequestParam(value = "id") int id, Model model, HttpSession session) {
+        Carro carro = (Carro) session.getAttribute("carro");
+        carro.decrementarUnidades(id, 1);
+        session.setAttribute("carro", carro);
+        return "redirect:verCarro";
     }
-    
-    @RequestMapping(value="/verCarro" , method = RequestMethod.GET)
+
+    @RequestMapping(value = "/verCarro", method = RequestMethod.GET)
     public String verCarro(Model model, HttpSession session) {
-        List <Categoria> listaCategorias = null;
+        List<Categoria> listaCategorias = null;
         listaCategorias = catDAO.findAll();
         model.addAttribute("listaCategorias", listaCategorias);
         model.addAttribute("carro", session.getAttribute("carro"));
         return "verCarro";
     }
-    
-    @RequestMapping(value="/hacerPedido", method = RequestMethod.GET)
+
+    @RequestMapping(value = "/hacerPedido", method = RequestMethod.GET)
     @SuppressWarnings("empty-statement")
-	public String hacerPedido(ModelMap model, HttpSession session) {
-            Carro carro = (Carro) session.getAttribute("carro");
-            String user = (String) session.getAttribute("user");
-            int userid = -1;
-            Usuario usuario = null;
-            if ( (session.getAttribute("user") != null) && (session.getAttribute("user") != "") ){
-                userid= (int) session.getAttribute("userid");
-                usuario = usuDAO.get(userid);
+    public String hacerPedido(ModelMap model, HttpSession session) {
+        Carro carro = (Carro) session.getAttribute("carro");
+        String user = (String) session.getAttribute("user");
+        int userid = -1;
+        Usuario usuario = null;
+        if ((session.getAttribute("user") != null) && (session.getAttribute("user") != "")) {
+            userid = (int) session.getAttribute("userid");
+            usuario = usuDAO.get(userid);
+        }
+        if ((carro != null) && (!carro.getContenido().isEmpty())) { // si no esta vacio
+            if (user != "") {
+                model.addAttribute("carro", session.getAttribute("carro"));
+                model.addAttribute("usuario", usuario);
+                return "hacerPedido";
+            } else {
+                return "loginORegistro";
             }
-            if ( (carro!= null) && (!carro.getContenido().isEmpty()) ){ // si no esta vacio
-                if (user != ""){
-                    model.addAttribute("carro", session.getAttribute("carro"));
-                    model.addAttribute("usuario", usuario);
-                    return "hacerPedido";
-                }
-                else{
-                    return "loginORegistro";
-                }
-            }
-            else{ //carro vacio
-                return "redirect:index";
-            }
-	}
-        
-        @RequestMapping(value="/pago", method = RequestMethod.GET)
-	public String pago(@RequestParam(value = "nombre") String nombre,
-                @RequestParam(value = "direccion") String direccion,
-                @RequestParam(value = "userid") int userid,
-                @RequestParam(value = "option") int tipoPago,
-                @RequestParam(value = "telefono") String telefono,
-                ModelMap model, HttpSession session) {
-            Carro carro = (Carro) session.getAttribute("carro");
-            Usuario usuario = usuDAO.get(userid);
-            usuario.setDireccion(direccion);
-            usuario.setNombre(nombre);
-            usuario.setTelefono(telefono);
-            usuDAO.update(usuario);
-            model.addAttribute("usuario", usuario);
-            model.addAttribute("userid",userid);
-            if(tipoPago==1){
-                int u = pagar(usuario,carro);
-                model.addAttribute("total", (carro.getPrecio() + 5) );
-                carro.vaciarCarro();
-                session.setAttribute("carro",carro);
-                if (u != -1){
+        } else { //carro vacio
+            return "redirect:index";
+        }
+    }
+
+    @RequestMapping(value = "/pago", method = RequestMethod.GET)
+    public String pago(@RequestParam(value = "nombre") String nombre,
+            @RequestParam(value = "direccion") String direccion,
+            @RequestParam(value = "userid") int userid,
+            @RequestParam(value = "option") int tipoPago,
+            @RequestParam(value = "telefono") String telefono,
+            ModelMap model, HttpSession session) {
+        Carro carro = (Carro) session.getAttribute("carro");
+        Usuario usuario = usuDAO.get(userid);
+        usuario.setDireccion(direccion);
+        usuario.setNombre(nombre);
+        usuario.setTelefono(telefono);
+        usuDAO.update(usuario);
+        model.addAttribute("usuario", usuario);
+        model.addAttribute("userid", userid);
+        if (tipoPago == 1) {
+            int u = pagar(usuario, carro);
+            model.addAttribute("total", (carro.getPrecio() + 5));
+            carro.vaciarCarro();
+            session.setAttribute("carro", carro);
+            if (u != -1) {
                 model.addAttribute("usu", producto.get(u));
                 return "productoAgotado";
             }
-                return "finPago";
-            }
-            else{
-                session.setAttribute("carro",carro);
-                return "pagoTarjeta";
-            }
-	}
-        
-       
-        @RequestMapping(value="/pagoTarjeta", method = RequestMethod.GET)
-	public String terminarPedido(@RequestParam(value = "userid") int userid,
-                ModelMap model, HttpSession session) {
-            Carro carro = (Carro) session.getAttribute("carro");
-            Usuario usuario = usuDAO.get(userid);
-            int u = pagar(usuario, carro);
-            session.setAttribute("carro",new Carro());
-            model.addAttribute("total", carro.getPrecio());
-            if (u != -1){
-                model.addAttribute("productoAgotado", producto.get(u));
-                return "productoAgotado";
-            }
-            
             return "finPago";
-	}
-        
-         public int pagar(Usuario u, Carro c){
-            Pedido p = new Pedido(u,c.getPrecio(),"Nuevo");
-            for (ProductoCarro productoCarro:c.getContenido()){ // comprobar si hay stock de todo
-                Producto prod = productoCarro.getProd();
-                if( (prod.getStock()- productoCarro.getCantidad() ) < 0){
-                    return prod.getIdproducto();
-                }
-            }
-            pedDAO.save(p);
-            for (ProductoCarro productoCarro:c.getContenido()){
-                Producto prod = productoCarro.getProd();
-                // hay que restar en el stock
-                prod.setStock(prod.getStock() - productoCarro.getCantidad());
-                producto.update(prod);
-                
-                Relacionproductopedido rel = new Relacionproductopedido(p.getIdpedido(),prod.getIdproducto(),productoCarro.getCantidad());
-                relDAO.save(rel);
-            }
-            return -1;
+        } else {
+            session.setAttribute("carro", carro);
+            return "pagoTarjeta";
         }
-        
-    
+    }
+
+    @RequestMapping(value = "/pagoTarjeta", method = RequestMethod.GET)
+    public String terminarPedido(@RequestParam(value = "userid") int userid,
+            ModelMap model, HttpSession session) {
+        Carro carro = (Carro) session.getAttribute("carro");
+        Usuario usuario = usuDAO.get(userid);
+        int u = pagar(usuario, carro);
+        session.setAttribute("carro", new Carro());
+        model.addAttribute("total", carro.getPrecio());
+        if (u != -1) {
+            model.addAttribute("productoAgotado", producto.get(u));
+            return "productoAgotado";
+        }
+
+        return "finPago";
+    }
+
+    public int pagar(Usuario u, Carro c) {
+        Pedido p = new Pedido(u, c.getPrecio(), "Nuevo");
+        for (ProductoCarro productoCarro : c.getContenido()) { // comprobar si hay stock de todo
+            Producto prod = productoCarro.getProd();
+            if ((prod.getStock() - productoCarro.getCantidad()) < 0) {
+                return prod.getIdproducto();
+            }
+        }
+        pedDAO.save(p);
+        for (ProductoCarro productoCarro : c.getContenido()) {
+            Producto prod = productoCarro.getProd();
+            // hay que restar en el stock
+            prod.setStock(prod.getStock() - productoCarro.getCantidad());
+            producto.update(prod);
+
+            Relacionproductopedido rel = new Relacionproductopedido(p.getIdpedido(), prod.getIdproducto(), productoCarro.getCantidad());
+            relDAO.save(rel);
+        }
+        return -1;
+    }
+
 }

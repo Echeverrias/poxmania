@@ -1,3 +1,5 @@
+//Autores: Samuel Martin y Juan Antonio Echeverrias
+
 package poxmania.controller;
 
 import java.util.ArrayList;
@@ -47,7 +49,6 @@ public class IndexController {
 	return "index";
 	}
         
-
         @RequestMapping(value="/indexEspecifico", method = RequestMethod.GET)
 	public String indexEspecifico(@RequestParam (value = "cat", required = false, defaultValue= "1")String categ, ModelMap model) {
         List <Producto> listaProductos = null;
@@ -64,15 +65,13 @@ public class IndexController {
         model.addAttribute("listaproductos", listAuxProd);
 	return "index";
 	}
-        
-        
+                
         @RequestMapping(value="/registro", method = RequestMethod.GET)
 	public String registro(ModelMap model) {
         model.addAttribute("aceptar", "/images/Aceptar.jpg");
 	return "registro";
 	}
-        
-        
+                
         @RequestMapping(value="/detallesProducto", method = RequestMethod.GET)
 	public String detallesProducto(@RequestParam (value = "id") int id,ModelMap model) {
             Producto producto = dao.get(id);
@@ -82,8 +81,5 @@ public class IndexController {
             model.addAttribute("prod",producto);
 	return "detallesProducto";
 	}
-        
-        
-        
-        
+               
 }

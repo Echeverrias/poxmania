@@ -1,3 +1,5 @@
+//Autores: Samuel Martin y Juan Antonio Echeverrias
+
 package poxmania.controller;
 
 import java.util.List;
@@ -38,8 +40,5 @@ public class AdminController {
 	public String opcionesAdminOK(ModelMap model) {
             return "adminOpciones";
 	}
-        
-        
-        
-
+ 
 }

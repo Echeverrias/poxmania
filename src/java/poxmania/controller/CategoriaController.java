@@ -1,5 +1,7 @@
+//Autores: Samuel Martin y Juan Antonio Echeverrias
 
 package poxmania.controller;
+
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -47,8 +49,7 @@ public class CategoriaController {
             model.addAttribute("categoria", categoria);
             return "editarCategoria";
 	}
-    
-    
+        
         @RequestMapping(value="/editarCategoriaFin", method = RequestMethod.GET)
 	public String editarCategoriaFin(@RequestParam(value = "nombreCategoria") String nombreCategoria, 
                 @RequestParam(value = "idcategoria") int idCategoria,
