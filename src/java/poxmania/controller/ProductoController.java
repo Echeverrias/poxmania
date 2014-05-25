@@ -164,7 +164,7 @@ public class ProductoController {
         }
     }
 
-    private String saveImage(String filename, MultipartFile image)
+    private String saveImage(String filename, MultipartFile imagen)
             throws RuntimeException, IOException {
         File file;
         try {
@@ -172,7 +172,7 @@ public class ProductoController {
                     + File.separator + ".." + File.separator + "web" + File.separator + "images"
                     + File.separator + filename);
 
-            FileUtils.writeByteArrayToFile(file, image.getBytes());
+            FileUtils.writeByteArrayToFile(file, imagen.getBytes());
             System.out.println("Go to the location:  " + file.toString()
                     + " on your computer and verify that the image has been stored.");
         } catch (IOException e) {

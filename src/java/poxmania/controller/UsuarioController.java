@@ -36,7 +36,7 @@ public class UsuarioController {
     }
 
     @RequestMapping(value = "/loginUsuario", method = RequestMethod.GET)
-    public String registrarUsuario(@RequestParam(value = "nick") String nick, 
+    public String loginUsuario(@RequestParam(value = "nick") String nick, 
             @RequestParam(value = "password") String password, HttpSession session) {
         Usuario usuario = daousu.findByNick(nick);
         if ((usuario != null) && (usuario.getPass().compareTo(password) == 0)) {
@@ -49,7 +49,7 @@ public class UsuarioController {
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logOut(HttpSession session) {
         session.setAttribute("user", "");
-        session.setAttribute("userid", "");
+        session.setAttribute("userid", -1);
         return "redirect:index";
     }
 

@@ -33,47 +33,47 @@ public class IndexController {
  
         @RequestMapping(value="/index", method = RequestMethod.GET)
 	public String index(ModelMap model,HttpSession session) {
-        List <Producto> listaProductos = null;
-        if (session.isNew()){ //si la sesión es nueva, creamos una variable carro a null y la guardamos en la sesión
-             Carro carro = new Carro();
-             session.setAttribute("carro",carro);
-             session.setAttribute("user","");
-             listaProductos = daoProd.findAll();
-             session.setAttribute("listaproductos", listaProductos);
-        }    
-        List <Categoria> listaCategorias = null;
-        listaCategorias = daoCat.findAll();
-        model.addAttribute("listaCategorias", listaCategorias);
-        return "index";
+            List <Producto> listaProductos = null;
+            if (session.isNew()){ //si la sesión es nueva, creamos una variable carro a null y la guardamos en la sesión
+                 Carro carro = new Carro();
+                 session.setAttribute("carro",carro);
+                 session.setAttribute("user","");
+                 listaProductos = daoProd.findAll();
+                 session.setAttribute("listaproductos", listaProductos);
+            }    
+            List <Categoria> listaCategorias = null;
+            listaCategorias = daoCat.findAll();
+            model.addAttribute("listaCategorias", listaCategorias);
+            return "index";
 	}
         
         @RequestMapping(value="/indexTodas", method = RequestMethod.GET)
 	public String indexTodas(ModelMap model, HttpSession session) {
-        List <Producto> listaProductos = null;
-        listaProductos = daoProd.findAll();
-        List <Categoria> listaCategorias = null;
-        listaCategorias = daoCat.findAll();
-        model.addAttribute("listaCategorias", listaCategorias);
-        session.setAttribute("listaproductos", listaProductos);
-        return "index";
+            List <Producto> listaProductos = null;
+            listaProductos = daoProd.findAll();
+            List <Categoria> listaCategorias = null;
+            listaCategorias = daoCat.findAll();
+            model.addAttribute("listaCategorias", listaCategorias);
+            session.setAttribute("listaproductos", listaProductos);
+            return "index";
 	}
         
         @RequestMapping(value="/indexEspecifico", method = RequestMethod.GET)
-	public String indexEspecifico(@RequestParam (value = "cat", required = false, defaultValue= "1")int categ, ModelMap model, HttpSession session) {
-        List <Producto> listaProductos = null;
-        Categoria categoria = daoCat.get(categ);
-        listaProductos = daoProd.findByCategoria(categoria);
-        List <Categoria> listaCategorias = null;
-        listaCategorias = daoCat.findAll();
-        model.addAttribute("listaCategorias", listaCategorias);
-        session.setAttribute("listaproductos", listaProductos);
-        return "index";
+        public String indexEspecifico(@RequestParam (value = "cat", required = false, defaultValue= "1")int categ, ModelMap model, HttpSession session) {
+            List <Producto> listaProductos = null;
+            Categoria categoria = daoCat.get(categ);
+            listaProductos = daoProd.findByCategoria(categoria);
+            List <Categoria> listaCategorias = null;
+            listaCategorias = daoCat.findAll();
+            model.addAttribute("listaCategorias", listaCategorias);
+            session.setAttribute("listaproductos", listaProductos);
+            return "index";
 	}
                 
         @RequestMapping(value="/registro", method = RequestMethod.GET)
 	public String registro(ModelMap model) {
-        model.addAttribute("aceptar", "/images/Aceptar.jpg");
-	return "registro";
+            model.addAttribute("aceptar", "/images/Aceptar.jpg");
+            return "registro";
 	}
                 
         @RequestMapping(value="/detallesProducto", method = RequestMethod.GET)

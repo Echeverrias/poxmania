@@ -48,7 +48,6 @@ public class CarroController {
         ProductoCarro prodcarro = new ProductoCarro(prod, 1);
         carro.meterEnCarro(prodcarro);
         session.setAttribute("carro", carro);
-        model.addAttribute("listaProductos", session.getAttribute("listaproductos"));
         return "redirect:index";
     }
 
@@ -92,13 +91,12 @@ public class CarroController {
         String user = (String) session.getAttribute("user");
         int userid = -1;
         Usuario usuario = null;
-        if ((session.getAttribute("user") != null) && (session.getAttribute("user") != "")) {
+        if ((user != null) && (user != "")) {
             userid = (int) session.getAttribute("userid");
             usuario = usuDAO.get(userid);
         }
         if ((carro != null) && (!carro.getContenido().isEmpty())) { // si no esta vacio
             if (user != "") {
-                model.addAttribute("carro", session.getAttribute("carro"));
                 model.addAttribute("usuario", usuario);
                 return "hacerPedido";
             } else {
@@ -146,13 +144,13 @@ public class CarroController {
         Carro carro = (Carro) session.getAttribute("carro");
         Usuario usuario = usuDAO.get(userid);
         int u = pagar(usuario, carro);
-        session.setAttribute("carro", new Carro());
+        carro.vaciarCarro();
+        session.setAttribute("carro", carro);
         model.addAttribute("total", carro.getPrecio());
         if (u != -1) {
             model.addAttribute("productoAgotado", producto.get(u));
             return "productoAgotado";
         }
-
         return "finPago";
     }
 
@@ -170,7 +168,6 @@ public class CarroController {
             // hay que restar en el stock
             prod.setStock(prod.getStock() - productoCarro.getCantidad());
             producto.update(prod);
-
             Relacionproductopedido rel = new Relacionproductopedido(p.getIdpedido(), prod.getIdproducto(), productoCarro.getCantidad());
             relDAO.save(rel);
         }
