@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+//Autores: Samuel Martin y Juan Antonio Echeverrias 
 
 package poxmania.model;
 
@@ -18,10 +14,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- *
- * @author S
- */
 @Entity
 @Table(name = "ADMINISTRADORES")
 @XmlRootElement
@@ -38,9 +30,11 @@ public class Administrador implements Serializable {
     @NotNull
     @Column(name = "IDADMIN")
     private Integer idadmin;
+    
     @Size(max = 20)
     @Column(name = "NOMBRE")
     private String nombre;
+    
     @Size(max = 60)
     @Column(name = "PASS")
     private String pass;

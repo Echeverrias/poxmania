@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+//Autores: Samuel Martin y Juan Antonio Echeverrias 
 
 package poxmania.model;
 
@@ -26,10 +22,7 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-/**
- *
- * @autores Samuel Martin y Juan antonio Echeverrias Aranda 
- */
+
 @Entity
 @Table(name = "PEDIDOS")
 @XmlRootElement
@@ -46,15 +39,19 @@ public class Pedido implements Serializable {
     @Column(name = "IDPEDIDO")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer idpedido;
+    
     @Basic(optional = false)
     @NotNull
     @Column(name = "TOTAL")
     private int total;
+    
     @Size(max = 200)
     @Column(name = "ESTADO")
     private String estado;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pedido")
     private List<Relacionproductopedido> relacionproductopedidoList;
+    
     @JoinColumn(name = "IDUSUARIO", referencedColumnName = "IDUSUARIO")
     @ManyToOne(optional = false)
     private Usuario idusuario;

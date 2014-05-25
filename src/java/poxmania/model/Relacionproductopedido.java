@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+//Autores: Samuel Martin y Juan Antonio Echeverrias 
 
 package poxmania.model;
 
@@ -19,10 +15,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- *
- * @author S
- */
 @Entity
 @Table(name = "RELACIONPRODUCTOPEDIDO")
 @XmlRootElement
@@ -39,9 +31,11 @@ public class Relacionproductopedido implements Serializable {
     @NotNull
     @Column(name = "CANTIDAD")
     private int cantidad;
+    
     @JoinColumn(name = "IDPEDIDO", referencedColumnName = "IDPEDIDO", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Pedido pedido;
+    
     @JoinColumn(name = "IDPRODUCTO", referencedColumnName = "IDPRODUCTO", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Producto producto;

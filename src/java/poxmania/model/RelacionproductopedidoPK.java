@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+//Autores: Samuel Martin y Juan Antonio Echeverrias 
 
 package poxmania.model;
 
@@ -12,16 +8,13 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.validation.constraints.NotNull;
 
-/**
- *
- * @author S
- */
 @Embeddable
 public class RelacionproductopedidoPK implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "IDPEDIDO")
     private int idpedido;
+    
     @Basic(optional = false)
     @NotNull
     @Column(name = "IDPRODUCTO")
@@ -35,8 +28,6 @@ public class RelacionproductopedidoPK implements Serializable {
         this.idproducto = idproducto;
     }
     
-
-
     public int getIdpedido() {
         return idpedido;
     }

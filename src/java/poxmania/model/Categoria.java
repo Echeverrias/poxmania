@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+//Autores: Samuel Martin y Juan Antonio Echeverrias 
 
 package poxmania.model;
 
@@ -23,10 +19,6 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-/**
- *
- * @author S
- */
 @Entity
 @Table(name = "CATEGORIAS")
 @XmlRootElement
@@ -42,9 +34,11 @@ public class Categoria implements Serializable {
     @Column(name = "IDCATEGORIA")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer idcategoria;
+    
     @Size(max = 30)
     @Column(name = "NOMBRECATEGORIA")
     private String nombrecategoria;
+    
     @OneToMany(mappedBy = "categoria")
     private List<Producto> productoList;
 
