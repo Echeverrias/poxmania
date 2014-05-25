@@ -1,6 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 <div class="navbar navbar-default navbar-static-top" role="navigation">
     <div class="container">
         <div class="navbar-header">
@@ -19,7 +20,6 @@
                     <li><a href=<c:url value="/indexEspecifico?cat=${categoria.idcategoria}" /> > ${categoria.nombrecategoria}</a></li>
                     </c:forEach>
             </ul>
-
             <ul class="nav navbar-nav navbar-right">    
                 <c:if test="${user == ''}">
                     <li ><a id="loginLi" href="#">Login</a></li>
@@ -30,7 +30,6 @@
                     <li ><a id="user" href=<c:url value="/logout" /> >Logout</a></li>
                     </c:if>
             </ul>
-
             <ul class="nav navbar-nav navbar-right">
                 <li>
                     <c:if test="${carro.total == 0}">
@@ -46,7 +45,6 @@
         </div>
     </div>
 </div>
-
 <div class="panel-heading">          
     <ul>
         <div class="row">          
@@ -58,8 +56,6 @@
                 <div class="col-xs-3 col-sm-3 col-md-3">
                     <input class="btn btn-success btn-block btn-lg" type="submit" name="enviar" value="Buscar" placeholder="PS4">
                 </div>
-
-
             </form>
         </div> 
     </ul>
