@@ -19,13 +19,13 @@ public class AdminController {
         AdminDAO adminDAO;
     
         @RequestMapping(value="/admin", method = RequestMethod.GET)
-	public String registro(ModelMap model) {
+	public String registro() {
             return "adminLogin";
 	}
         
         @RequestMapping(value="/opcionesAdmin", method = RequestMethod.GET)
 	public String opcionesAdmin(@RequestParam(value = "nombre") String nombre, 
-           @RequestParam(value = "pass") String pass, ModelMap model) {
+           @RequestParam(value = "pass") String pass) {
             List <Administrador> listaAdministradores = adminDAO.findByNombreAdmin(nombre, pass);
             if (!listaAdministradores.isEmpty()){
                 return "adminOpciones";
@@ -37,7 +37,7 @@ public class AdminController {
         
         
         @RequestMapping(value="/opcionesAdminOK", method = RequestMethod.GET)
-	public String opcionesAdminOK(ModelMap model) {
+	public String opcionesAdminOK() {
             return "adminOpciones";
 	}
  

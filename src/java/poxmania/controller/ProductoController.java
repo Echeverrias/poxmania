@@ -80,8 +80,7 @@ public class ProductoController {
             @RequestParam(value = "precio") double precio,
             @RequestParam(value = "imagen") MultipartFile imagen,
             @RequestParam(value = "rutaImg") String rutaImg,
-            @RequestParam(value = "stock") int stock,
-            ModelMap model) {
+            @RequestParam(value = "stock") int stock) {
 
         if (!imagen.isEmpty()) {
             try {
@@ -121,13 +120,18 @@ public class ProductoController {
     }
 
     @RequestMapping(value = "/borrarProductoConcreto", method = RequestMethod.GET)
-    public String borrarProductoConcreto(@RequestParam(value = "id", required = false, defaultValue = "1") int idProd, ModelMap model) {
+    public String borrarProductoConcreto(@RequestParam(value = "id", required = false, defaultValue = "1") int idProd) {
         daoProd.delete(idProd);
         return "adminOpciones";
     }
 
     @RequestMapping(value = "/insertarProducto", method = RequestMethod.POST)
-    public String insertarProducto(@RequestParam(value = "imagen", required = false) MultipartFile imagen, @RequestParam(value = "nombre") String nombre, @RequestParam(value = "categoria") String categoria, @RequestParam(value = "descripcion") String descripcion, @RequestParam(value = "precio") double precio, @RequestParam(value = "stock") int stock) {
+    public String insertarProducto(@RequestParam(value = "imagen", required = false) MultipartFile imagen, 
+            @RequestParam(value = "nombre") String nombre, 
+            @RequestParam(value = "categoria") String categoria, 
+            @RequestParam(value = "descripcion") String descripcion, 
+            @RequestParam(value = "precio") double precio, 
+            @RequestParam(value = "stock") int stock) {
 
         String rutaImg = "";
         if (!imagen.isEmpty()) {

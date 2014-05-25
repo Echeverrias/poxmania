@@ -18,7 +18,13 @@ public class UsuarioController {
     UsuarioDAO daousu;
 
     @RequestMapping(value = "/registrarUsuario", method = RequestMethod.GET)
-    public String registrarUsuario(@RequestParam(value = "first_name") String first_name, @RequestParam(value = "last_name") String last_name, @RequestParam(value = "direccion") String direccion, @RequestParam(value = "telefono") String telefono, @RequestParam(value = "nick") String nick, @RequestParam(value = "password") String password, HttpSession session) {
+    public String registrarUsuario(@RequestParam(value = "first_name") String first_name, 
+            @RequestParam(value = "last_name") String last_name, 
+            @RequestParam(value = "direccion") String direccion, 
+            @RequestParam(value = "telefono") String telefono, 
+            @RequestParam(value = "nick") String nick, 
+            @RequestParam(value = "password") String password, 
+            HttpSession session) {
         String vista = "registro";
         Usuario usuario = daousu.findByNick(nick);
         if (usuario == null) {
@@ -30,7 +36,8 @@ public class UsuarioController {
     }
 
     @RequestMapping(value = "/loginUsuario", method = RequestMethod.GET)
-    public String registrarUsuario(@RequestParam(value = "nick") String nick, @RequestParam(value = "password") String password, HttpSession session) {
+    public String registrarUsuario(@RequestParam(value = "nick") String nick, 
+            @RequestParam(value = "password") String password, HttpSession session) {
         Usuario usuario = daousu.findByNick(nick);
         if ((usuario != null) && (usuario.getPass().compareTo(password) == 0)) {
             session.setAttribute("user", nick);

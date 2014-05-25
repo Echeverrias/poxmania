@@ -53,8 +53,7 @@ public class PedidoController {
                 
         @RequestMapping(value="/editarPedidoConcreto", method = RequestMethod.GET)
 	public String editarPedidoConcreto(@RequestParam(value = "idpedido") int idpedido,
-                @RequestParam(value = "estado") String estado,
-                ModelMap model) {
+                @RequestParam(value = "estado") String estado) {
             Pedido ped = daoPed.get(idpedido);
             ped.setEstado(estado);
             daoPed.update(ped);

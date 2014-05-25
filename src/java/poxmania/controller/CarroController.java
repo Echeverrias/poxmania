@@ -53,7 +53,7 @@ public class CarroController {
     }
 
     @RequestMapping(value = "/sacarDeCarro", method = RequestMethod.GET)
-    public String sacarDeCarro(@RequestParam(value = "id") int id, Model model, HttpSession session) {
+    public String sacarDeCarro(@RequestParam(value = "id") int id, HttpSession session) {
         Carro carro = (Carro) session.getAttribute("carro");
         carro.sacarDeCarro(id);
         session.setAttribute("carro", carro);
@@ -61,7 +61,7 @@ public class CarroController {
     }
 
     @RequestMapping(value = "/incrementar", method = RequestMethod.GET)
-    public String incrementarUnidades(@RequestParam(value = "id") int id, Model model, HttpSession session) {
+    public String incrementarUnidades(@RequestParam(value = "id") int id, HttpSession session) {
         Carro carro = (Carro) session.getAttribute("carro");
         carro.incrementarUnidades(id, 1);
         session.setAttribute("carro", carro);
@@ -69,7 +69,7 @@ public class CarroController {
     }
 
     @RequestMapping(value = "/decrementar", method = RequestMethod.GET)
-    public String decrementarUnidades(@RequestParam(value = "id") int id, Model model, HttpSession session) {
+    public String decrementarUnidades(@RequestParam(value = "id") int id, HttpSession session) {
         Carro carro = (Carro) session.getAttribute("carro");
         carro.decrementarUnidades(id, 1);
         session.setAttribute("carro", carro);

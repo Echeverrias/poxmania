@@ -28,8 +28,7 @@ public class CategoriaController {
 	}
         
         @RequestMapping(value="/insertarCategoria", method = RequestMethod.GET)
-	public String insertarCategoria(@RequestParam(value = "nombreCategoria") String nombreCategoria, 
-            ModelMap model) {
+	public String insertarCategoria(@RequestParam(value = "nombreCategoria") String nombreCategoria) {
             Categoria cat = new Categoria(nombreCategoria);
             daoCat.save(cat);
             return "adminOpciones";
@@ -52,8 +51,7 @@ public class CategoriaController {
         
         @RequestMapping(value="/editarCategoriaFin", method = RequestMethod.GET)
 	public String editarCategoriaFin(@RequestParam(value = "nombreCategoria") String nombreCategoria, 
-                @RequestParam(value = "idcategoria") int idCategoria,
-                ModelMap model) {
+                @RequestParam(value = "idcategoria") int idCategoria) {
             Categoria categoria = daoCat.get(idCategoria);
             categoria.setNombrecategoria(nombreCategoria);
             daoCat.update(categoria);
@@ -70,7 +68,7 @@ public class CategoriaController {
 	}
         
         @RequestMapping(value="/borrarCategoriaConcreta", method = RequestMethod.GET)
-	public String borrarCategoriaConcreta(@RequestParam (value = "id", required = false, defaultValue= "1")int idCat, ModelMap model) {
+	public String borrarCategoriaConcreta(@RequestParam (value = "id", required = false, defaultValue= "1")int idCat) {
             List <Producto> listaProductos = null;
             listaProductos = daoProd.findAll();
             for(Producto producto:listaProductos){
