@@ -21,7 +21,7 @@ import poxmania.model.Producto;
 public class IndexController {
     
         @Autowired
-        ProductoDAO dao;
+        ProductoDAO daoProd;
         
         @Autowired
         CategoriaDAO daoCat;
@@ -38,32 +38,36 @@ public class IndexController {
              Carro carro = new Carro();
              session.setAttribute("carro",carro);
              session.setAttribute("user","");
-             }    
-        listaProductos = dao.findAll();
-        session.setAttribute("listaproductos", listaProductos);
-        listaProductos=(List <Producto>)session.getAttribute("listaproductos");
+             listaProductos = daoProd.findAll();
+             session.setAttribute("listaproductos", listaProductos);
+        }    
         List <Categoria> listaCategorias = null;
         listaCategorias = daoCat.findAll();
         model.addAttribute("listaCategorias", listaCategorias);
-        //model.addAttribute("listaproductos", listaProductos);
-	return "index";
+        return "index";
+	}
+        
+        @RequestMapping(value="/indexTodas", method = RequestMethod.GET)
+	public String indexTodas(ModelMap model, HttpSession session) {
+        List <Producto> listaProductos = null;
+        listaProductos = daoProd.findAll();
+        List <Categoria> listaCategorias = null;
+        listaCategorias = daoCat.findAll();
+        model.addAttribute("listaCategorias", listaCategorias);
+        session.setAttribute("listaproductos", listaProductos);
+        return "index";
 	}
         
         @RequestMapping(value="/indexEspecifico", method = RequestMethod.GET)
-	public String indexEspecifico(@RequestParam (value = "cat", required = false, defaultValue= "1")String categ, ModelMap model) {
+	public String indexEspecifico(@RequestParam (value = "cat", required = false, defaultValue= "1")int categ, ModelMap model, HttpSession session) {
         List <Producto> listaProductos = null;
-        listaProductos = dao.findAll();
+        Categoria categoria = daoCat.get(categ);
+        listaProductos = daoProd.findByCategoria(categoria);
         List <Categoria> listaCategorias = null;
         listaCategorias = daoCat.findAll();
-        List <Producto> listAuxProd = new ArrayList<Producto>();
-        for (Producto prod: listaProductos){
-            if (prod.getCategoria().getIdcategoria() == Integer.parseInt(categ)){
-                listAuxProd.add(prod);
-            }
-        }
         model.addAttribute("listaCategorias", listaCategorias);
-        model.addAttribute("listaproductos", listAuxProd);
-	return "index";
+        session.setAttribute("listaproductos", listaProductos);
+        return "index";
 	}
                 
         @RequestMapping(value="/registro", method = RequestMethod.GET)
@@ -74,7 +78,7 @@ public class IndexController {
                 
         @RequestMapping(value="/detallesProducto", method = RequestMethod.GET)
 	public String detallesProducto(@RequestParam (value = "id") int id,ModelMap model) {
-            Producto producto = dao.get(id);
+            Producto producto = daoProd.get(id);
             List <Categoria> listaCategorias = null;
             listaCategorias = daoCat.findAll();
             model.addAttribute("listaCategorias", listaCategorias);

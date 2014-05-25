@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,13 +36,13 @@ public class ProductoController {
     ProductoDAO daoProd;
 
     @RequestMapping(value = "/buscarProducto", method = RequestMethod.GET)
-    public String buscarProducto(@RequestParam(value = "nombre") String nombre, ModelMap model) {
+    public String buscarProducto(@RequestParam(value = "nombre") String nombre, ModelMap model,HttpSession session) {
         List<Producto> listaProductos = null;
         listaProductos = daoProd.findByNombreproducto(nombre);
         List<Categoria> listaCategorias = null;
         listaCategorias = daoCat.findAll();
         model.addAttribute("listaCategorias", listaCategorias);
-        model.addAttribute("listaproductos", listaProductos);
+        session.setAttribute("listaproductos", listaProductos);
         return "index";
     }
 

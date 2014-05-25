@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.TypedQuery;
 import org.springframework.stereotype.Component;
 import poxmania.model.Producto;
+import poxmania.model.Categoria;
 
 @Component
 public class ProductoDAO extends GeneralDAO<Producto,Integer>{
@@ -40,7 +41,7 @@ public class ProductoDAO extends GeneralDAO<Producto,Integer>{
         return lista;
     }
     
-    public List<Producto> findByCategoria (String categoria){
+    public List<Producto> findByCategoria (Categoria categoria){
         this.open();
         TypedQuery<Producto> query= getManager().createNamedQuery("Producto.findByCategoria", Producto.class);
         query.setParameter("categoria", categoria);

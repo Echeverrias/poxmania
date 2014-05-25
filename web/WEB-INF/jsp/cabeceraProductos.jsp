@@ -17,7 +17,7 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav"> 
-                <li ><a href=<c:url value="/index"/> >Todas</a></li>
+                <li ><a href=<c:url value="/indexTodas"/> >Todas</a></li>
                     <c:forEach var="categoria" items="${listaCategorias}" >
                     <li><a href=<c:url value="/indexEspecifico?cat=${categoria.idcategoria}" /> > ${categoria.nombrecategoria}</a></li>
                     </c:forEach>
