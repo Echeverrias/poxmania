@@ -23,7 +23,7 @@
             <h1 class="page-header">${prod.nombreproducto}</h1>
             <div class="izquierda">
                 <div class="thumbnail">
-                    <img  alt="300x200" src=<c:url value="${prod.imagen}" /> style="width: 100%; ">
+                    <img  class="imagen" alt="300x200" src=<c:url value="${prod.imagen}" /> >
                 </div>
             </div>
             <div class="derecha">
