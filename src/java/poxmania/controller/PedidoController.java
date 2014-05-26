@@ -57,7 +57,7 @@ public class PedidoController {
             Pedido ped = daoPed.get(idpedido);
             ped.setEstado(estado);
             daoPed.update(ped);
-            return "adminOpciones";
+            return "redirect:editarPedidos";
 	}
         
         @RequestMapping(value="/verMisPedidos", method = RequestMethod.GET)
