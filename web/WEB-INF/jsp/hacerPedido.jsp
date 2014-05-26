@@ -44,8 +44,8 @@
                         </div>
                         <input type="hidden" name="option" value="1" id="btn-input" />
                         <div class="btn-group" data-toggle="buttons-radio">  
-                            <button id="btn-one" type="button" data-toggle="button" name="option" value="1" class="btn btn-primary">Pago contra reembolso ( +5€ )</button>
-                            <button id="btn-two" type="button" data-toggle="button" name="option" value="2" class="btn btn-primary">Pago con tarjeta de crédito</button>
+                            <button id="btn-one" type="button" data-toggle="button" name="option" value="1" class="btn btn-primary radios">Pago contra reembolso ( +5€ )</button>
+                            <button id="btn-two" type="button" data-toggle="button" name="option" value="2" class="btn btn-default radios">Pago con tarjeta de crédito</button>
                         </div>                 
                         <hr class="colorgraph">
                         <div class="row">
