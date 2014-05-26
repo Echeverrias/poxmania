@@ -13,6 +13,7 @@
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
         <!-- para el login -->
         <link href=<c:url value="/css/signin.css" /> rel="stylesheet">
+        <link href=<c:url value="/css/index.css" /> rel="stylesheet">
         <script src=<c:url value="/js/jquery.js" /> type="text/javascript"></script> 
         <script src=<c:url value="/js/indexSignIn.js" /> type="text/javascript"></script> 
     </head>
@@ -23,9 +24,9 @@
                 <c:forEach var="producto" items="${listaproductos}" >
                     <div class="col-sm-6 col-md-4">
                         <div class="thumbnail">
-                            <img  alt="300x200" src=<c:url value="${producto.imagen}"/> style="width: 300px; height: 200px;">
+                            <img  alt="300x200" src=<c:url value="${producto.imagen}"/>>
                                   <div class="caption">
-                                <h3 style="text-align: center">${producto.nombreproducto} ${producto.precio} <span class="glyphicon glyphicon-euro"></span></h3>
+                                <h3>${producto.nombreproducto} ${producto.precio} <span class="glyphicon glyphicon-euro"></span></h3>
                                     <c:if test="${producto.stock < 5}">
                                         <c:if test="${producto.stock > 0}">
                                         <h2 style="color:red">¡¡ Corre que quedan ${producto.stock} !!</h2>
