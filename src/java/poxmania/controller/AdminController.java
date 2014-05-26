@@ -17,7 +17,8 @@ public class AdminController {
         @Autowired
         AdminDAO adminDAO;
     
-        @RequestMapping(value="/admin", method = RequestMethod.GET)
+       
+        @RequestMapping(value="/admin", method = RequestMethod.GET) 
 	public String registro() {
             return "adminLogin";
 	}
