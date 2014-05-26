@@ -128,7 +128,7 @@ public class CarroController {
             carro.vaciarCarro();
             session.setAttribute("carro", carro);
             if (u != -1) {
-                model.addAttribute("usu", producto.get(u));
+                model.addAttribute("productoAgotado", producto.get(u));
                 return "productoAgotado";
             }
             return "finPago";
