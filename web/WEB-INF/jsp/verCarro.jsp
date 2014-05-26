@@ -13,11 +13,13 @@
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
         <!-- para el login -->
         <link href=<c:url value="/css/signin.css" /> rel="stylesheet">
+        <link href=<c:url value="/css/verCarro.css" /> rel="stylesheet">
         <script src=<c:url value="/js/jquery.js" /> type="text/javascript"></script> 
         <script src=<c:url value="/js/indexSignIn.js" /> type="text/javascript"></script> 
     </head>
     <body>
         <c:import url="cabeceraProductos.jsp" charEncoding="utf-8"/>
+        <div id="verCarro">
         <h1> Contenido del carro <span class="glyphicon glyphicon-shopping-cart"></span></h1>
             <c:forEach var="producto" items="${carro.contenido}" >
             <img title="imagen" style="width: 10%" alt="imagen de ${producto.prod.nombreproducto}" src=".${producto.prod.imagen}">
@@ -40,9 +42,14 @@
                 Subtotal:   ${producto.prod.precio * producto.cantidad} <span class="glyphicon glyphicon-euro"></span>
             <br><h1>_______________________</h1><br>         
         </c:forEach>
+            
+        </div>
+            
         <div class="row">
             <div class="col-xs-6 col-md-6"><a href=<c:url value="/hacerPedido" /> class="btn btn-primary btn-block btn-lg" tabindex="1">Terminar Compra</a></div>
             <div class="col-xs-6 col-md-6"><a href=<c:url value="/index" /> class="btn btn-success btn-block btn-lg" tabindex="2" >Volver</a></div>
         </div>
+        
+        <c:import url="footer.jsp" charEncoding="utf-8"/>
     </body>
 </html>

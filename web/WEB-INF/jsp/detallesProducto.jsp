@@ -43,5 +43,7 @@
                     <a href="<c:url value="/index" />" class="btn btn-default" role="button">Volver al inicio</a></p>
             </div>
         </div>
+            <div class="separador"></div>
+        <c:import url="footer.jsp" charEncoding="utf-8"/>
     </body>
 </html>

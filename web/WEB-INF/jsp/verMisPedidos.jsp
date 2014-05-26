@@ -39,6 +39,7 @@
         <ul class="list-group">
             <a class="col-xs-6 btn btn-primary btn-block btn-lg" href="<c:url value="/index" />" >Volver al índice</a>
         </ul>
+        <c:import url="footer.jsp" charEncoding="utf-8"/>
     </body>
 </html>
 
