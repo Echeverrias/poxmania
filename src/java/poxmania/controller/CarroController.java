@@ -144,9 +144,9 @@ public class CarroController {
         Carro carro = (Carro) session.getAttribute("carro");
         Usuario usuario = usuDAO.get(userid);
         int u = pagar(usuario, carro);
+        model.addAttribute("total", carro.getPrecio());
         carro.vaciarCarro();
         session.setAttribute("carro", carro);
-        model.addAttribute("total", carro.getPrecio());
         if (u != -1) {
             model.addAttribute("productoAgotado", producto.get(u));
             return "productoAgotado";

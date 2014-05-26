@@ -18,6 +18,6 @@
         <h2>En unos días le llegará su pedido, muchas gracias por su confianza</h2>
         <h3>El importe total es de ${total} € </h3>
         <br>
-        <a href=<c:url value="/index"/> class="btn btn-success btn-block btn-lg" tabindex="10" style="max-width:20%; margin: auto">Volver al inicio</a>
+        <a href=<c:url value="/indexTodas"/> class="btn btn-success btn-block btn-lg" tabindex="10" style="max-width:20%; margin: auto">Volver al inicio</a>
     </body>
 </html>

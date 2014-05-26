@@ -27,6 +27,7 @@ public class Relacionproductopedido implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected RelacionproductopedidoPK relacionproductopedidoPK;
+    
     @Basic(optional = false)
     @NotNull
     @Column(name = "CANTIDAD")

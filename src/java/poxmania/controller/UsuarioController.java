@@ -30,6 +30,7 @@ public class UsuarioController {
         if (usuario == null) {
             daousu.save(new Usuario(nick, password, first_name + " " + last_name, direccion, telefono));
             session.setAttribute("user", nick);
+            session.setAttribute("userid", daousu.findByNick(nick).getIdusuario());
             vista = "index";
         }
         return vista;

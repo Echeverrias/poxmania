@@ -73,10 +73,6 @@ public class Usuario implements Serializable {
         this.telefono = telefono;
     }
 
-    public Usuario(Integer idusuario) {
-        this.idusuario = idusuario;
-    }
-
     public Integer getIdusuario() {
         return idusuario;
     }
